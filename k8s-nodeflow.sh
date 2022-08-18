@@ -4,7 +4,7 @@ set -Euo pipefail
 K8S_NODEFLOW_DEBUG=${K8S_NODEFLOW_DEBUG:-no}
 function _log() {
   [[ "$K8S_NODEFLOW_DEBUG" != "yes" ]] && return
-  1>&2 echo "$@"
+  1>&2 echo "$(date) $*"
 }
 
 drain_every=${1:-600}
