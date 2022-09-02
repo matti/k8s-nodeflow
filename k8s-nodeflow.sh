@@ -2,6 +2,8 @@
 set -Euo pipefail
 
 K8S_NODEFLOW_DEBUG=${K8S_NODEFLOW_DEBUG:-no}
+K8S_NODEFLOW_NODES_MINIMUM=${K8S_NODEFLOW_NODES_MINIMUM:-0}
+
 function _log() {
   [[ "$K8S_NODEFLOW_DEBUG" != "yes" ]] && return
   1>&2 echo "$(date) $*"
@@ -48,7 +50,7 @@ while true; do
     sleep 1
   done
 
-  if [[ "$nodes_count" -lt "2" ]]; then
+  if [[ "$nodes_count" -lt "$K8S_NODEFLOW_NODES_MINIMUM" ]]; then
     _log "nodes_count too low"
     sleep 10
     continue
