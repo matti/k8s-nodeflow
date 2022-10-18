@@ -26,7 +26,7 @@ while true; do
     pods_not_running_count=$(echo "$pods_not_running" | wc -l | xargs) || true
     _log "draining paused, '$pods_not_running_count' pods with label '$pods_not_running_by_this_label_prevent_draining' not running"
 
-    sleep 10
+    sleep 3
   done
 
   node=""
