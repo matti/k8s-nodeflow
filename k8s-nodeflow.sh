@@ -14,8 +14,6 @@ drain_nodes_with_this_label=$2
 pods_not_running_by_this_label_prevent_draining=$3
 
 while true; do
-  started_at=$SECONDS
-
   while true; do
     pods_not_running=$(2>/dev/null kubectl get pod --no-headers \
       --all-namespaces \
@@ -29,6 +27,8 @@ while true; do
     sleep 3
   done
 
+  # start counting after not paused
+  started_at=$SECONDS
   node=""
   nodes_count=-1
 
