@@ -57,10 +57,11 @@ while true; do
   fi
 
   while true; do
-    _log "draining '$node'"
-    >/dev/null 2>&1 kubectl drain "$node" --delete-local-data --ignore-daemonsets --force && break
+    >/dev/null 2>&1 kubectl get node "$node" || break
 
-    _log "failed to issue drain for '$node'"
+    _log "draining '$node'"
+    >/dev/null 2>&1 kubectl drain "$node" --delete-local-data --ignore-daemonsets --force || _log "drain failed"
+
     sleep 1
   done
 
